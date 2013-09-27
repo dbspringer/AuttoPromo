@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AuttoPromo
  * Plugin URI: https://github.com/dbspringer/AuttoPromo
- * Description: Automagically tweet posts from your blog.
+ * Description: This awesome plugin chooses a post for you, breaks that post into tweets, and pushes those puppies out to the world
  * Version: 0.1-alpha
  * Author: Team MOAR
  * Author URI: http://URI_Of_The_Plugin_Author
