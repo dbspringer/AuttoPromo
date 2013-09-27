@@ -2,11 +2,11 @@
 /**
  * Plugin Name: AuttoPromo
  * Plugin URI: https://github.com/dbspringer/AuttoPromo
- * Description: A brief description of the Plugin.
- * Version: The Plugin's Version Number, e.g.: 1.0
- * Author: Name Of The Plugin Author
+ * Description: Automagically tweet posts from your blog.
+ * Version: 0.1-alpha
+ * Author: Team MOAR
  * Author URI: http://URI_Of_The_Plugin_Author
- * License: A "Slug" license name e.g. GPL2
+ * License: GPL2
  *
  * GNU General Public License, Free Software Foundation <http://creativecommons.org/licenses/GPL/2.0/>
  *
