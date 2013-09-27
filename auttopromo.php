@@ -27,7 +27,7 @@
 
 define( 'AUTTOPROMO_VERSION', '0.1-alpha' );
 define( 'AUTTOPROMO_ROOT' , dirname( __FILE__ ) );
-define( 'AUTTOPROMO_FILE_PATH' , ADCONTROL_ROOT . '/' . basename( __FILE__ ) );
+define( 'AUTTOPROMO_FILE_PATH' , FOO_ROOT . '/' . basename( __FILE__ ) );
 define( 'AUTTOPROMO_URL' , plugins_url( '/', __FILE__ ) );
 
 class AuttoPromo {
