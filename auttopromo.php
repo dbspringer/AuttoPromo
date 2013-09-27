@@ -32,6 +32,25 @@ define( 'AUTTOPROMO_URL' , plugins_url( '/', __FILE__ ) );
 
 class AuttoPromo {
 
+	/**
+	 * Instantiate the plugin
+	 *
+	 * @since 0.1
+	 */
+	function __construct() {
+		add_action( 'init', array( &$this, 'init' ) );
+	}
+
+	/**
+	 * Code to run on WordPress 'init' hook
+	 *
+	 * @since 0.1
+	 */
+	function init() {
+		// requires Jetpack for now (probably always)
+		if ( ! self::check_jetpack() )
+			return;
+	}
 }
 
 global $auttopromo;
