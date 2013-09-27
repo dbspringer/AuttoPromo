@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AuttoPromo
  * Plugin URI: https://github.com/dbspringer/AuttoPromo
- * Description: A brief description of the Plugin.
+ * Description: This awesome plugin chooses a post for you, breaks that post into tweets, and pushes those puppies out to the world
  * Version: The Plugin's Version Number, e.g.: 1.0
  * Author: Name Of The Plugin Author
  * Author URI: http://URI_Of_The_Plugin_Author
