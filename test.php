@@ -27,10 +27,11 @@ function max_len($text, $chunk_len=136) {
 
 
 function recursive_max_len($text,$max_len=136,$n=1) {
-  if (count(chop_text($text,$max_len))/$max_len<$n) { // our base case
+  if (ceil(log10(count(chop_text($text,$max_len))<$n))) { // our base case
      return $max_len;
   }
   else {
+  	 echo ceil(log10(count(chop_text($text,$max_len)))." number of chunks".$max_len." length, ".$n." digits\n";
      return recursive_max_len($text,$max_len-2,$n*10); // <--calling itself.
   }
 }
