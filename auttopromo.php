@@ -63,7 +63,7 @@ class AuttoPromo {
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		if ( ! is_plugin_active( 'jetpack/jetpack.php' ) || ! ( Jetpack::is_active() || Jetpack::is_development_mode() ) ) {
 			if ( is_admin() )
-				require_once( ADCONTROL_ROOT . '/php/no-jetpack.php' );
+				require_once( AUTTOPROMO_ROOT . '/php/no-jetpack.php' );
 
 			return false;
 		}
