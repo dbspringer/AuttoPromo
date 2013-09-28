@@ -25,18 +25,7 @@ function max_len($text, $chunk_len=136) {
 	return $chunk_len;
 }
 
-
-function recursive_max_len($text,$max_len=136,$n=1) {
-  if (ceil(log10(count(chop_text($text,$max_len))<$n))) { // our base case
-     return $max_len;
-  }
-  else {
-  	 echo ceil(log10(count(chop_text($text,$max_len)))." number of chunks".$max_len." length, ".$n." digits\n";
-     return recursive_max_len($text,$max_len-2,$n*10); // <--calling itself.
-  }
-}
-
-function max_len( $text_len, $max_len = 136, $n = 1 ) {
+function max_len2( $text_len, $max_len = 136, $n = 1 ) {
 	if($text_len < $max_len)
 		return $max_len;
 
@@ -48,10 +37,4 @@ function max_len( $text_len, $max_len = 136, $n = 1 ) {
 
 echo "\n".'Our sample text:'."\n";
 print_r(chop_text(file_get_contents('./KJV.txt', true)));
-max_len(file_get_contents('./KJV.txt', true));
-echo recursive_max_len(file_get_contents('./KJV.txt', true)).' is the recursive max length'."\n";
-
-// echo "\n".'The King James Version of the Bible:'."\n";
-// max_len(file_get_contents('./KJV.txt', true));
-
-
+echo max_len2( strlen(file_get_contents('./KJV.txt', true)));
