@@ -36,9 +36,9 @@ function recursive_max_len($text,$max_len=136,$n=1) {
 }
 
 echo "\n".'Our sample text:'."\n";
-print_r(chop_text(file_get_contents('./creed.txt', true)));
-max_len(file_get_contents('./creed.txt', true));
-echo recursive_max_len(file_get_contents('./creed.txt', true)).' is the recursive max length'."\n";
+print_r(chop_text(file_get_contents('./KJV.txt', true)));
+max_len(file_get_contents('./KJV.txt', true));
+echo recursive_max_len(file_get_contents('./KJV.txt', true)).' is the recursive max length'."\n";
 
 // echo "\n".'The King James Version of the Bible:'."\n";
 // max_len(file_get_contents('./KJV.txt', true));
