@@ -17,5 +17,5 @@ function max_len2( $text_len, $max_len = 136, $n = 1 ) {
 }
 
 echo "\n".'Tweet contents:'."\n";
-print_r(chop_text(file_get_contents('./KJV.txt', true)));
-echo max_len2( strlen(file_get_contents('./KJV.txt', true)))." chunk length"."\n";
+print_r(chop_text(file_get_contents('./creed.txt', true)));
+echo "Chunk length: ".max_len2( strlen(file_get_contents('./creed.txt', true)))."\n";
