@@ -7,16 +7,13 @@ $sample = "Automattic Creed\nI will never stop learning. I won’t just work on 
 print_r($output);
 
 function chop_text($text) {
-	// return str_split($text, 136);
 	return explode("\n", wordwrap($text, 136, "\n"));
 }
 
-function max_len($text) {
-	$chunk_len = 136;
-	$string_len = strlen($text);
-	echo strlen($text).' characters'."\n";
-	$chunk_count =  ceil($string_len / $chunk_len);
-	echo ceil($chunk_count).' chunks'."\n";
+function max_len($text, $chunk_len=136) {
+	$chunk_count =  count(chop_text($text));
+	echo $chunk_count.' chunks'."\n";
+	echo ceil(log10($chunk_count)).' digits in the chunk count'."\n";
 	if($chunk_count>9) {
 		$chunk_len = $chunk_len-2;
 		$chunk_count =  ceil($string_len / $chunk_len);
@@ -31,10 +28,19 @@ function max_len($text) {
 	return $chunk_len;
 }
 
+function recursive_max_len($text, $chunk_len, $n=10) {
+  if ($string_len / max < $n) { // our base case
+     return $chunk_len;
+  }
+  else {
+     return $n * fact($n-1); // <--calling itself.
+  }
+}
+
 echo "\n".'Our sample text:'."\n";
 max_len($sample);
 
-echo "\n".'The King James Version of the Bible:'."\n";
-max_len(file_get_contents('./KJV.txt', true));
+// echo "\n".'The King James Version of the Bible:'."\n";
+// max_len(file_get_contents('./KJV.txt', true));
 
 
