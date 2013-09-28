@@ -36,11 +36,11 @@ class AuttoPromo_No_Jetpack {
 	 */
 	function options_page() {
 		$settings = __( 'AuttoPromo Settings', 'auttopromo' );
+		$something = admin_url( 'plugin-install.php?tab=search&type=term&s=Jetpack+by+WordPress.com&plugin-search-input=Search+Plugins' );
+		$link = "<a href='$something'>";
 		$notice = sprintf(
 			__( 'AuttoPromo requires %sJetpack%s to be installed and activated at this time.', 'auttopromo' ),
-			'<a href="http://jetpack.me/" target="_blank">',
-			'</a>'
-		);
+		$link, '</a>' );
 		echo <<<HTML
 		<div class="wrap">
 			<div id="icon-options-general" class="icon32"><br></div>
