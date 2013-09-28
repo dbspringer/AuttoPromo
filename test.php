@@ -35,6 +35,16 @@ function recursive_max_len($text,$max_len=136,$n=1) {
   }
 }
 
+function max_len( $text_len, $max_len = 136, $n = 1 ) {
+	if($text_len < $max_len)
+		return $max_len;
+
+	if($text_len/$max_len > $n)
+		return max_len($text_len, $max_len-2, $n*10);
+	else
+		return $max_len;
+}
+
 echo "\n".'Our sample text:'."\n";
 print_r(chop_text(file_get_contents('./KJV.txt', true)));
 max_len(file_get_contents('./KJV.txt', true));
