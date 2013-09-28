@@ -7,34 +7,15 @@ function chop_text($text,$max_len2=136) {
 	return explode("\n", wordwrap($text, $max_len2, "\n"));
 }
 
-function max_len($text, $chunk_len=136) {
-	$chunk_count =  count(chop_text($text,$chunk_len));
-	echo $chunk_count.' chunks'."\n";
-	echo ceil(log10($chunk_count)).' digits in the chunk count'."\n";
-	if($chunk_count>9) {
-		$chunk_len = $chunk_len-2;
-		$chunk_count =  count(chop_text($text,$chunk_len));
-		echo ceil($chunk_count).' chunks'."\n";
-	}
-	if($chunk_count>99) {
-		$chunk_len = $chunk_len-2;
-		$chunk_count =  count(chop_text($text,$chunk_len));
-		echo ceil($chunk_count).' chunks'."\n";
-	}
-	echo $chunk_len.' chunk length'."\n";
-	return $chunk_len;
-}
-
 function max_len2( $text_len, $max_len = 136, $n = 1 ) {
 	if($text_len < $max_len)
 		return $max_len;
-
 	if($text_len/$max_len > $n)
-		return max_len($text_len, $max_len-2, $n*10);
+		return max_len2($text_len, $max_len-2, $n*10);
 	else
 		return $max_len;
 }
 
-echo "\n".'Our sample text:'."\n";
+echo "\n".'Tweet contents:'."\n";
 print_r(chop_text(file_get_contents('./KJV.txt', true)));
-echo max_len2( strlen(file_get_contents('./KJV.txt', true)));
+echo max_len2( strlen(file_get_contents('./KJV.txt', true)))." chunk length"."\n";
