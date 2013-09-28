@@ -25,18 +25,10 @@ function max_len($text, $chunk_len=136) {
 	return $chunk_len;
 }
 
-function recursive_max_len($text, $chunk_len, $n=10) {
-  if ($string_len / max < $n) { // our base case
-     return $chunk_len;
-  }
-  else {
-     return $n * fact($n-1); // <--calling itself.
-  }
-}
 
 echo "\n".'Our sample text:'."\n";
 print_r(chop_text(file_get_contents('./creed.txt', true)));
-max_len($sample);
+max_len(file_get_contents('./creed.txt', true));
 
 // echo "\n".'The King James Version of the Bible:'."\n";
 // max_len(file_get_contents('./KJV.txt', true));
