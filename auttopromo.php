@@ -51,6 +51,25 @@ class AuttoPromo {
 		if ( ! self::check_jetpack() )
 			return;
 	}
+
+	/**
+	 * Enforce Jetpack activated. Otherwise, load special no-jetpack admin.
+	 *
+	 * @return true if Jetpack is active and activated
+	 *
+	 * @since 0.1
+	 */
+	private static function check_jetpack() {
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( ! is_plugin_active( 'jetpack/jetpack.php' ) || ! ( Jetpack::is_active() || Jetpack::is_development_mode() ) ) {
+			if ( is_admin() )
+				require_once( ADCONTROL_ROOT . '/php/no-jetpack.php' );
+
+			return false;
+		}
+
+		return true;
+	}
 }
 
 global $auttopromo;
