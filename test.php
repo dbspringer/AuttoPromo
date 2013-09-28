@@ -17,7 +17,9 @@ function max_len($text) {
 	$string_len = strlen($text);
 	$chunk_count =  $string_len / $start_len;
 	echo strlen($text).' characters, '.ceil($chunk_count).' tweets'."\n";
-	return ceil($chunk_count);
+	echo $start_len.' characters max'."\n";
+	return $start_len;
+
 }
 
 max_len($sample);
