@@ -13,8 +13,10 @@ function chop_text($text) {
 
 function max_len($text) {
 	$start_len = 136;
-	$number = strlen($text) / $start_len;
-	echo strlen($text).' characters, '.$number.' tweets'."\n";
+	$string_len = strlen($text);
+	$chunk_count =  $string_len / $start_len;
+	echo strlen($text).' characters, '.ceil($chunk_count).' tweets'."\n";
+	return ceil($chunk_count);
 }
 
 max_len($sample);
