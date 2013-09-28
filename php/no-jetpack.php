@@ -36,8 +36,8 @@ class AuttoPromo_No_Jetpack {
 	 */
 	function options_page() {
 		$settings = __( 'AuttoPromo Settings', 'auttopromo' );
-		$something = admin_url( 'plugin-install.php?tab=search&type=term&s=Jetpack+by+WordPress.com&plugin-search-input=Search+Plugins' );
-		$link = "<a href='$something'>";
+		$install_jp = admin_url( 'plugin-install.php?tab=search&type=term&s=Jetpack+by+WordPress.com&plugin-search-input=Search+Plugins' );
+		$link = "<a href='$install_jp'>";
 		$notice = sprintf(
 			__( 'AuttoPromo requires %sJetpack%s to be installed and activated at this time.', 'auttopromo' ),
 		$link, '</a>' );
