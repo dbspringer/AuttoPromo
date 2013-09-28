@@ -10,3 +10,14 @@ print_r($output);
 function chop_text($text) {
 	return array();
 }
+
+function max_len($text) {
+	$start_len = 136;
+	$number = strlen($text) / $start_len;
+	echo strlen($text).' characters, '.$number.' tweets'."\n";
+}
+
+max_len($sample);
+
+
+
