@@ -2,7 +2,7 @@
 
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
-$file=file_get_contents('./creed.txt', true);
+$file=file_get_contents('./KJV2.txt', true);
 
 function max_len( $text_len, $max_len = 136, $n = 1 ) {
 	if ( $text_len < $max_len )
@@ -13,7 +13,7 @@ function max_len( $text_len, $max_len = 136, $n = 1 ) {
 		return $max_len;
 }
 
-function chop_text($text,$max_len=136) {
+function chop_text($text,$max_len) {
 	return explode("\n", wordwrap($text, $max_len, "\n"));
 }
 
@@ -24,14 +24,12 @@ function append_counts($array,$how_many) {
 		$tweets_to_send[]= "$value $counter/$how_many";
 	    $counter++;
 	}
-	print_r($tweets_to_send);
+	return $tweets_to_send;
 }
 
-print_r(chop_text($file)); // for testing
 $chunk_length=max_len( strlen($file));
-echo "Chunk length: ".$chunk_length."\n"; // for testing
+echo "Chunk length: $chunk_length\n"; // for testing
 $tweet_count=count(chop_text($file,$chunk_length));
-echo "Tweet count: ".$tweet_count."\n"; // for testing
-echo "Tweet contents:\n"; // for testing
-append_counts(chop_text($file,$chunk_length),$tweet_count);
+echo "Tweet count: $tweet_count\n"; // for testing
+print_r(append_counts(chop_text($file,$chunk_length),$tweet_count));
 ?>
