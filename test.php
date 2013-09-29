@@ -17,12 +17,12 @@ function max_len( $text_len, $max_len = 136, $n = 1 ) {
 		return $max_len;
 }
 
-echo "\nTweet contents:\n";
-print_r(chop_text($file));
+echo "\nTweet contents:\n"; // for testing
+print_r(chop_text($file)); // for testing
 $chunk_length=max_len( strlen($file));
-echo "Chunk length: ".$chunk_length."\n";
+echo "Chunk length: ".$chunk_length."\n"; // for testing
 $tweet_count=count(chop_text($file,$chunk_length));
-echo "Tweet count: ".$tweet_count."\n";
+echo "Tweet count: ".$tweet_count."\n"; // for testing
 
 function append_counts($array) {
 	$counter=1;
