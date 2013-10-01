@@ -53,6 +53,11 @@ class AuttoPromo {
 			return;
 	}
 
+	/**
+	 * Check for change to publish then break the post up into chunks
+	 *
+	 * @since 0.1
+	 */
 	public function post_publish_chunks( $new_status, $old_status, $post ) {
 		if ( $new_status == $old_status || 'publish' != $new_status )
 			return;
