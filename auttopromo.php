@@ -86,10 +86,10 @@ class AuttoPromo {
 
 	/**
 	 * Returns max length a chunk can have given # of total posts
-	 * @param  [type]  $text_len [description]
-	 * @param  integer $max_len  [description]
-	 * @param  integer $n        [description]
-	 * @return [type]            [description]
+	 * @param  integer $text_len total length of the post
+	 * @param  integer $max_len  starting value for max length of chunks
+	 * @param  integer $n        driver of loop; number of digits in total count
+	 * @return integer           max string length each chunk can have to fit counts
 	 *
 	 * @since 0.1
 	 */
@@ -104,9 +104,9 @@ class AuttoPromo {
 
 	/**
 	 * Returns an array containing the different chunks
-	 * @param  [type] $text    [description]
-	 * @param  [type] $max_len [description]
-	 * @return [type]          [description]
+	 * @param  string   $text     original post content
+	 * @param  integer $max_len  max lengh of each chunk
+	 * @return array             the different chunks
 	 *
 	 * @since 0.1
 	 */
@@ -116,9 +116,9 @@ class AuttoPromo {
 
 	/**
 	 * Returns an array that adds chunks counts to each chunk
-	 * @param  [type] $array    [description]
-	 * @param  [type] $how_many [description]
-	 * @return [type]           [description]
+	 * @param  array   $array     the chunks
+	 * @param  integer $how_many  total number of chunks
+	 * @return array              the different chunks to send
 	 *
 	 * @since 0.1
 	 */
@@ -134,8 +134,8 @@ class AuttoPromo {
 
 	/**
 	 * Takes a post text and returns an array of chunks ready for tweeting or posting
-	 * @param  [type] $raw_post [description]
-	 * @return [type]           [description]
+	 * @param  string $raw_post  The post you want to explode
+	 * @return array 			 the different chunks for tweeting/posting
 	 *
 	 * @since 0.1
 	 */
