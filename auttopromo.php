@@ -62,26 +62,28 @@ class AuttoPromo {
 		if ( $new_status == $old_status || 'publish' != $new_status )
 			return;
 
-		//Create post object
-$chunked_post = array(
-	'post_title'    => $post->post_title . ', chunked',
-	'post_content' => wp_strip_all_tags ($post->post_content),
-	'post_status' => 'publish',
-    'post_date' => date('Y-m-d H:i:s'),
-    'post_author' => $post->post_author,
-    'post_type' => $post->post_type,
-    'post_category' => array(0)
-);
-//insert post
-wp_insert_post( $chunked_post );
+		if( ! has_tag( array( 'AuttoPromo', 'auttopromo', 'AUTTOPROMO' ), $post ) )
+			return;
 
-		$ap_tags = array('AuttoPromo', 'auttopromo', 'AUTTOPROMO');
+		// has the tag lets do some stuff
+		$content = wp_strip_all_tags( $post->post_content );
+		$content = preg_replace( '/\r/', '', $content );
+		$content = preg_replace( '/\n/', '&#x27A5;', $content );
+		$chunked = self::parse_post( $content );
+		$wrapped = '<p>' . implode( '</p><p>', $chunked ) . '</p>';
 
-		if (has_tag( $ap_tags, $post )) {
-			//has the tag lets do some stuff
-		}
+		$chunked_post = array(
+			'post_title'    => $post->post_title . ', chunked',
+			'post_content'  => $wrapped,
+			'post_status'   => 'publish',
+		    'post_date'     => $post->post_date,
+		    'post_author'   => $post->post_author,
+		    'post_type'     => $post->post_type,
+		    'post_category' => array(0)
+		);
 
-		// TODO chop text & create new post
+		//insert post
+		wp_insert_post( $chunked_post );
 	}
 
 	/**
@@ -112,11 +114,11 @@ wp_insert_post( $chunked_post );
 	 *
 	 * @since 0.1
 	 */
-	function max_len( $text_len, $max_len = 136, $n = 1 ) {
+	static function max_len( $text_len, $max_len = 136, $n = 1 ) {
 		if ( $text_len < $max_len )
 			return $max_len;
 		if ( $text_len/$max_len > $n )
-			return max_len( $text_len, $max_len-2, $n*10 );
+			return self::max_len( $text_len, $max_len-2, $n*10 );
 		else
 			return $max_len;
 	}
@@ -129,25 +131,26 @@ wp_insert_post( $chunked_post );
 	 *
 	 * @since 0.1
 	 */
-	function chop_text($text,$max_len) {
-		return explode("\n", wordwrap($text, $max_len, "\n"));
+	static function chop_text( $text, $max_len ) {
+		return explode( "\n", wordwrap( $text, $max_len, "\n" ) );
 	}
 
 	/**
 	 * Returns an array that adds chunks counts to each chunk
-	 * @param  array   $array     the chunks
-	 * @param  integer $how_many  total number of chunks
+	 * @param  array   $chunks    the chunks to append counts to
 	 * @return array              the different chunks to send
 	 *
 	 * @since 0.1
 	 */
-	function append_counts($array,$how_many) {
+	static function append_counts( $chunks ) {
+		$how_many = count( $chunks );
+		$counter = 1;
 		$chunks_to_send = array();
-		$counter=1;
-		foreach ($array as $value) {
-			$chunks_to_send[]= "$value $counter/$how_many";
+		foreach ( $chunks as $value ) {
+			$chunks_to_send[] = "$value $counter/$how_many";
 		    $counter++;
 		}
+
 		return $chunks_to_send;
 	}
 
@@ -158,15 +161,12 @@ wp_insert_post( $chunked_post );
 	 *
 	 * @since 0.1
 	 */
-	function parse_post ($raw_post) {
-		$chunk_length=max_len( strlen($raw_post));
-		$chunk_count=count(chop_text($raw_post,$chunk_length));
-		return append_counts(chop_text($raw_post,$chunk_length),$chunk_count);
-
+	static function parse_post( $raw_post ) {
+		$meta_max = self::max_len( strlen( $raw_post ) );
+		$chunks   = self::chop_text( $raw_post, $meta_max );
+		return self::append_counts( $chunks );
 	}
-
 }
 
 global $auttopromo;
 $auttopromo = new AuttoPromo();
-
