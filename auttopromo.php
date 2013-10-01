@@ -62,6 +62,12 @@ class AuttoPromo {
 		if ( $new_status == $old_status || 'publish' != $new_status )
 			return;
 
+		$ap_tags = array('AuttoPromo', 'auttopromo', 'AUTTOPROMO');
+
+		if (has_tag( $ap_tags, $post )) {
+			//has the tag lets do some stuff
+		}
+
 		// TODO chop text & create new post
 	}
 
