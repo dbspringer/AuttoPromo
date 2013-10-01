@@ -84,23 +84,45 @@ class AuttoPromo {
 		return true;
 	}
 
+	/**
+	 * Returns max length a chunk can have given # of total posts
+	 * @param  [type]  $text_len [description]
+	 * @param  integer $max_len  [description]
+	 * @param  integer $n        [description]
+	 * @return [type]            [description]
+	 *
+	 * @since 0.1
+	 */
 	function max_len( $text_len, $max_len = 136, $n = 1 ) {
-	// returns max length a chunk can have given # of total posts
-	if ( $text_len < $max_len )
-		return $max_len;
-	if ( $text_len/$max_len > $n )
-		return max_len( $text_len, $max_len-2, $n*10 );
-	else
-		return $max_len;
+		if ( $text_len < $max_len )
+			return $max_len;
+		if ( $text_len/$max_len > $n )
+			return max_len( $text_len, $max_len-2, $n*10 );
+		else
+			return $max_len;
 	}
 
+	/**
+	 * Returns an array containing the different chunks
+	 * @param  [type] $text    [description]
+	 * @param  [type] $max_len [description]
+	 * @return [type]          [description]
+	 *
+	 * @since 0.1
+	 */
 	function chop_text($text,$max_len) {
-	// returns an array containing the different chunks
 		return explode("\n", wordwrap($text, $max_len, "\n"));
 	}
 
+	/**
+	 * Returns an array that adds chunks counts to each chunk
+	 * @param  [type] $array    [description]
+	 * @param  [type] $how_many [description]
+	 * @return [type]           [description]
+	 *
+	 * @since 0.1
+	 */
 	function append_counts($array,$how_many) {
-	// returns an array that adds chunks counts to each chunk
 		$chunks_to_send = array();
 		$counter=1;
 		foreach ($array as $value) {
@@ -110,8 +132,14 @@ class AuttoPromo {
 		return $chunks_to_send;
 	}
 
+	/**
+	 * Takes a post text and returns an array of chunks ready for tweeting or posting
+	 * @param  [type] $raw_post [description]
+	 * @return [type]           [description]
+	 *
+	 * @since 0.1
+	 */
 	function parse_post ($raw_post) {
-	// takes a post text and returns an array of chunks ready for tweeting or posting
 		$chunk_length=max_len( strlen($raw_post));
 		$chunk_count=count(chop_text($raw_post,$chunk_length));
 		return append_counts(chop_text($raw_post,$chunk_length),$chunk_count);
