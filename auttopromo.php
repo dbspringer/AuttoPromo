@@ -57,7 +57,18 @@ class AuttoPromo {
 		if ( $new_status == $old_status || 'publish' != $new_status )
 			return;
 
-		// TODO chop text & create new post
+		//Create post object
+$chunked_post = array(
+	'post_title'    => $post->post_title . ', chunked',
+	'post_content' => wp_strip_all_tags ($post->post_content),
+	'post_status' => 'publish',
+    'post_date' => date('Y-m-d H:i:s'),
+    'post_author' => $post->post_author,
+    'post_type' => $post->post_type,
+    'post_category' => array(0)
+);
+//insert post
+wp_insert_post( $chunked_post );
 	}
 
 	/**
@@ -82,3 +93,4 @@ class AuttoPromo {
 
 global $auttopromo;
 $auttopromo = new AuttoPromo();
+
