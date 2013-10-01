@@ -100,7 +100,7 @@ class AuttoPromo {
 	}
 
 	function append_counts($array,$how_many) {
-	// returns an array that adds chunks counts to each chunk
+	// returns an array that appends chunk count (e.g. "1 / 7") to each chunk
 		$chunks_to_send = array();
 		$counter=1;
 		foreach ($array as $value) {
