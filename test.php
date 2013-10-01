@@ -2,7 +2,7 @@
 
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
-$file=file_get_contents('./KJV2.txt', true);
+$file=file_get_contents('./creed.txt', true);
 
 function max_len( $text_len, $max_len = 136, $n = 1 ) {
 	if ( $text_len < $max_len )
