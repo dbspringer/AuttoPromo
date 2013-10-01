@@ -53,6 +53,11 @@ class AuttoPromo {
 			return;
 	}
 
+	/**
+	 * Check for change to publish then break the post up into chunks
+	 *
+	 * @since 0.1
+	 */
 	public function post_publish_chunks( $new_status, $old_status, $post ) {
 		if ( $new_status == $old_status || 'publish' != $new_status )
 			return;
@@ -69,6 +74,14 @@ $chunked_post = array(
 );
 //insert post
 wp_insert_post( $chunked_post );
+
+		$ap_tags = array('AuttoPromo', 'auttopromo', 'AUTTOPROMO');
+
+		if (has_tag( $ap_tags, $post )) {
+			//has the tag lets do some stuff
+		}
+
+		// TODO chop text & create new post
 	}
 
 	/**
@@ -89,6 +102,69 @@ wp_insert_post( $chunked_post );
 
 		return true;
 	}
+
+	/**
+	 * Returns max length a chunk can have given # of total posts
+	 * @param  integer $text_len total length of the post
+	 * @param  integer $max_len  starting value for max length of chunks
+	 * @param  integer $n        driver of loop; number of digits in total count
+	 * @return integer           max string length each chunk can have to fit counts
+	 *
+	 * @since 0.1
+	 */
+	function max_len( $text_len, $max_len = 136, $n = 1 ) {
+		if ( $text_len < $max_len )
+			return $max_len;
+		if ( $text_len/$max_len > $n )
+			return max_len( $text_len, $max_len-2, $n*10 );
+		else
+			return $max_len;
+	}
+
+	/**
+	 * Returns an array containing the different chunks
+	 * @param  string   $text     original post content
+	 * @param  integer $max_len  max lengh of each chunk
+	 * @return array             the different chunks
+	 *
+	 * @since 0.1
+	 */
+	function chop_text($text,$max_len) {
+		return explode("\n", wordwrap($text, $max_len, "\n"));
+	}
+
+	/**
+	 * Returns an array that adds chunks counts to each chunk
+	 * @param  array   $array     the chunks
+	 * @param  integer $how_many  total number of chunks
+	 * @return array              the different chunks to send
+	 *
+	 * @since 0.1
+	 */
+	function append_counts($array,$how_many) {
+		$chunks_to_send = array();
+		$counter=1;
+		foreach ($array as $value) {
+			$chunks_to_send[]= "$value $counter/$how_many";
+		    $counter++;
+		}
+		return $chunks_to_send;
+	}
+
+	/**
+	 * Takes a post text and returns an array of chunks ready for tweeting or posting
+	 * @param  string $raw_post  The post you want to explode
+	 * @return array 			 the different chunks for tweeting/posting
+	 *
+	 * @since 0.1
+	 */
+	function parse_post ($raw_post) {
+		$chunk_length=max_len( strlen($raw_post));
+		$chunk_count=count(chop_text($raw_post,$chunk_length));
+		return append_counts(chop_text($raw_post,$chunk_length),$chunk_count);
+
+	}
+
 }
 
 global $auttopromo;
