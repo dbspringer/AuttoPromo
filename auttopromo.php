@@ -39,6 +39,7 @@ class AuttoPromo {
 	 */
 	function __construct() {
 		add_action( 'init', array( &$this, 'init' ) );
+		add_action( 'transition_post_status', array( &$this, 'post_publish_chunks' ), 10, 3 );
 	}
 
 	/**
@@ -46,10 +47,17 @@ class AuttoPromo {
 	 *
 	 * @since 0.1
 	 */
-	function init() {
+	public function init() {
 		// requires Jetpack for now (probably always)
 		if ( ! self::check_jetpack() )
 			return;
+	}
+
+	public function post_publish_chunks( $new_status, $old_status, $post ) {
+		if ( $new_status == $old_status || 'publish' != $new_status )
+			return;
+
+		// TODO chop text & create new post
 	}
 
 	/**
