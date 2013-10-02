@@ -76,7 +76,7 @@ class AuttoPromo {
 			'post_title'    => $post->post_title . ', chunked',
 			'post_content'  => $wrapped,
 			'post_status'   => 'publish',
-		    'post_date'     => $post->post_date,
+		    'post_date'     => date( 'Y-m-d H:i:s', strtotime( $post->post_date ) + 1 ),
 		    'post_author'   => $post->post_author,
 		    'post_type'     => $post->post_type,
 		    'post_category' => array(0)
